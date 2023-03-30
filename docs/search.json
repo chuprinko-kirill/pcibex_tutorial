@@ -1,33 +1,5 @@
 [
   {
-    "objectID": "intro.html",
-    "href": "intro.html",
-    "title": "1  Introduction",
-    "section": "",
-    "text": "What is PCIbex (PennController for Internet Based Experiments)? It is the JavaScript based environment for experiment developing and hosting. Essentially it is an extension for the original Ibex project that provided pre-made technical decisions for popular experimental paradigms. Vanilla ibex is an open source project and at the moment can be found, for example, here [16.02.2023]. However, PCIbex seems to have a more stable host and provide more instruments, so it is reasonable to utilize it rather than the original project."
-  },
-  {
-    "objectID": "summary.html",
-    "href": "summary.html",
-    "title": "2  Summary",
-    "section": "",
-    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
-    "section": "",
-    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "pcibex_tutorial",
-    "section": "",
-    "text": "Preface\n\nIn this tutorial we will discuss how to run experiments on the online platform PCIbex. We will discuss how to upload stimuli, do proper code for your research, share an experiment and download results. We will look in details at two experimental techniques with online measurements: self-paced reading task (sprt for short) and speeded grammaticality judgement (sgj).\n\n\nAll discussed templates are available at the GitHub repository of this tutorial.\n\n\nFor specific questions you should check the project documentation. It includes links to video and textual tutorials by the PCIbex team. If you encounter specific issues you can check out the dedicated forums which is pretty active at the moment."
-  },
-  {
     "objectID": "intro.html#getting-started",
     "href": "intro.html#getting-started",
     "title": "1  Introduction",
@@ -47,5 +19,19 @@
     "title": "1  Introduction",
     "section": "1.3 How to use templates we are about to discuss",
     "text": "1.3 How to use templates we are about to discuss\nYou will need to download the needed files from the"
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "2  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "pcibex_tutorial",
+    "section": "",
+    "text": "Preface\n\nIn this tutorial we will discuss how to run experiments on the online platform PCIbex. We will discuss how to upload stimuli, do proper code for your research, share an experiment and download results. We will look in details at two experimental techniques with online measurements: self-paced reading task (sprt for short) and speeded grammaticality judgement (sgj).\n\n\nAll discussed templates are available at the GitHub repository of this tutorial.\n\n\nFor specific questions you should check the project documentation. It includes links to video and textual tutorials by the PCIbex team. If you encounter specific issues you can check out the dedicated forums which is pretty active at the moment."
   }
 ]
