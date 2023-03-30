@@ -1,0 +1,14 @@
+{
+  "hash": "2f513613f97aa032d6c2d1cf1e512f36",
+  "result": {
+    "markdown": "# Introduction\n\nThis is a book created from markdown and executable code.\n\nSee @knuth84 for additional discussion of literate programming.\n\n``` JS\n// This is run at the beginning of each trial\nHeader(\n    // Declare a global Var element \"ID\" in which we will store the participant's ID\n    newVar(\"ID\").global()    \n)\n.log( \"id\" , getVar(\"ID\") ) // Add the ID to all trials' results lines\n```\n\n\n::: {.cell}\n\n```{.r .cell-code}\nc(1:10)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n [1]  1  2  3  4  5  6  7  8  9 10\n```\n:::\n:::\n\n{{< video https://www.youtube.com/embed/wo9vZccmqwc >}}\n\n\n\n```{}\n```\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,5 @@
+group,item,sentence,feature,question,answer_correct,answer_wrong
+A,1,First sentence of A group,feature1,It is a comprehension question!,correct answer,wrong answer
+A,2,Second sentence of A group,feature2,,,
+B,1,First sentence of B group,feature2,,,
+B,2,Second sentence of B group,feature1,It is a comprehension question!,correct answer,wrong answer

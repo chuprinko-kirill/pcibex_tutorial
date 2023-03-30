@@ -1,0 +1,4 @@
+# Preface {#sec-preface .unnumbered}
+
+<p>In this tutorial we will discuss how to run experiments on the online platform [PCIbex](https://www.pcibex.net/). We will discuss how to upload stimuli, do proper code for your research, share an experiment and download results. We will look in details at two experimental techniques with online measurements: self-paced reading task (sprt for short) and speeded grammaticality judgement (sgj).</p>
+<p>All discussed templates are available at the GitHub repository of this tutorial.</p>
