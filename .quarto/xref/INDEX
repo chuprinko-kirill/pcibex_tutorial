@@ -16,5 +16,17 @@
   },
   "common_code_and_form.qmd": {
     "common_code_and_form.html": "fde2d0d3"
+  },
+  "sprt.qmd": {
+    "sprt.html": "c0feba7e"
+  },
+  "common_things.qmd": {
+    "common_things.html": "533b72d6"
+  },
+  "sgj.qmd": {
+    "sgj.html": "faccb01a"
+  },
+  "after_coding.qmd": {
+    "after_coding.html": "75ab715e"
   }
 }

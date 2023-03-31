@@ -29,7 +29,7 @@ Sequence("instructions", "experiment", SendResults(), "end")
 Sequence("instructions", randomize("experiment"), SendResults(), "end")
 ```
 
-## Agreement and form
+## Consent and demographic form
 
 <p>Header -- is a command that maps commands on Trial elements. In other words, you write something for Header and it is automatically applied to each of Trial elements (which are our logical blocks of experiments).</p>
 
@@ -68,6 +68,33 @@ newButton("continue")
 )
 ```
 
-## Organizing experimental list
+## Organizing an experimental list
 
-## Ending slide
+<p>As you remember the project environment allows you to upload supplementary materials into the 'resources' area. Your materials can be various files: audio, video, pictures (check out other templates on the platform). Most frequently you want to use your list of sentence and question stimuli.</p>
+
+<p>Most probably you construct your stimuli in a spreadsheet like Excel or Google-documents. First, the .**csv** format is the only possible way to read the stimuli file in the project. Most of spreadsheet applications handle exporting your data to the .csv. Perhaps, you will just need to pay a bit extra attention to the fact that the separator in your eventual file is an actual comma because sometimes .csv export function separates values with semicolons instead. Anyway, you can fix it easily in the project environment with the auto-correction.</p>
+
+<p>Second, your file should have a specific organization like on the figures below. The first row contains headers, each column is a one variable, all columns are placed tightly, and have no empty columns within them. Besides stimuli sentences we can add any other column for our convenience. The program will ignore them unless we say the other. For example, we can make a column \"feature\" where we will mark which variable\'s value is presented in the particular stimulus.
+
+If you have multiple experimental lists you can separate them in the same stimuli file. In order to do this, make a column named \"**group**\", the code will automatically identify that your file contains several experimental lists and will equally distribute your participants among experimental groups. It means that you don't have to make several projects for each group of participants.</p>
+
+::: {layout-ncol="2"}
+![Spreadsheet format of stimuli](images/exp_list_spreadsheet.png)
+
+![PCIbex format of stimuli](images/exp_list_pcibex.png)
+:::
+
+## Finishing slide
+
+<p>Let's jump into the ending of each project. It is pretty simple. You will need to declare a new logical block with *newTrial()* command and write some code within the brackets. Usually I write some thanksgiving or code for people from the crowdsource within the *newText()* command. You can prettify any message in your code with html tags withing the messages or with some css styling within the *.print()* command.</p>
+
+<p>*newButton().wait()* command allows you to stay your participants on the slide forever. It creates a new button and pauses everything until a user interacts with it but it doesn't print it out, so no button actually appears on the screen.</p>
+
+``` javascript
+newTrial ( "final" ,
+    newText("The experiment is over. Thank you for participating!<br>You can now close this page.")
+        .print("center at 50vw","middle at 50vh")
+    ,
+    newButton().wait()
+)
+```

@@ -1,7 +1,17 @@
 # Speeded grammaticlity judgement
 
+In this chapter we will discuss how to add to your speeded grammaticality judgement task. The chunk below represents a possible way to code sptr into your project. It consists of the following parts:
+
+1.  Introducing the uploaded .csv file with stimuli. 'row' is a variable name which will iterate through each row of you .csv file.
+
+2.  Introduce a new experimental block and write within it code just for one trial of your task. Instead of placing full stimulus sentences we will access your experimental list with *row* variable.
+
+3.  Write down to your resulting file some information about participants or stimuli. If you use *Header()* command you don't need to write commands to log participants' information from the questionnaire. Here, I usually prefer to write down some information about stimuli that I stored in the .csv list. It can ease the further analysis of the results.
+
 ``` javascript
-Template( "list.csv" , 
+// 1) Activate the stimuli list you uploaded
+Template( "list.csv" ,
+// 2) Make an example trial that will be filled with list's values
     row => newTrial( "test" ,  
         
         newController("Separator",{
@@ -10,7 +20,6 @@ Template( "list.csv" ,
             errorMessage: "Time to answer is out!"
         }).center().print("center at 50vw","middle at 50vh").wait().remove()
         ,
-        
         newController("AcceptabilityJudgment",{
             s: "",
             q: row.target,
@@ -23,7 +32,55 @@ Template( "list.csv" ,
         .wait()
         .remove()
     )
-    .log( "Group"     , row.group) 
+// 3) write down stimluli info in the resulting file
     .log( "Condition" , row.condition)
 )
+```
+
+Let's look closer at the the code parts. *Template("pcibex_test.csv", row =\>)* holds the whole code of the experimental block in the brackets. First, we declare the name of the .csv file uploaded into the environment. Secondly, we declare a variable *row* that will iterate through each row of the file (you can change the name). In order to specify the column to refer you type *row* and the name of the column in the file with the dot, e.g. *row.sentence*.
+
+## Separators
+
+Let's begin each new experimental trial with a screen separating two consequent trials. In order to present any ***Controller*** (pre-made coded elements can be found at *Modules* area) you need to write its name in quotes as a first argument of the *newController* command. Parameters of the controller follow it after the comma.
+
+It will allow to control pauses between the trials. In this case pause is 1200ms written down in the *transfer* parameter. It also let us encourage participants to be more careful if they answer for too long. The message is stored in the *errorMessage* parameter which is optional.
+
+Don't miss all the commands placed with the dots. *.print()* puts it on the screen, *.wait()* actually puts a small pause until some event will happen (in this case until the transfer timer ends) and *.remove()* deletes the controller, so it doesn't stack with next slides.
+
+``` javascript
+ newController("Separator",{
+        transfer: 1200,
+        normalMessage: "***",
+        errorMessage: "Time to answer is out!"
+    }).center().print("center at 50vw","middle at 50vh").wait().remove()
+```
+
+## Grammaticality judgement
+
+In order to make a speeded grammaticality judgement you should evoke an *AcceptabilityJudgment* controller and put the timer for it. In this case participants have a 5 seconds time limit specified in the *timeout* parameter.
+
+We have to leave the *s* parameter blank because it is an obligatory argument but we actually have only a sentence to evaluate and no other supplementary information or question for it. So, one of the obligatory arguments like *s* or *q* should be left blank. *q* argument holds the sentence to evaluate we stored in the "target" column of the experimental list file.
+
+We I ask to evaluate sentences on a scale from 1 to 5, which we write as an array in the *as* parameter. Note that we put them as character data type, in quotes, it will allow participants just to press the corresponding keys when *autoFirstChar* parameter is set true. *presentAsScale: true* presents the scale in a more comfortable horizontal manner.§
+
+``` javascript
+newController("AcceptabilityJudgment",{
+            s: "",
+            q: row.target,
+            as: ['1','2','3','4','5'],
+            presentAsScale: true,
+            autoFirstChar : true,
+            timeout: 5000
+        }).center().print("center at 50vw","middle at 50vh")
+        .log()
+        .wait()
+        .remove()
+```
+
+## Logging down features
+
+This commands after the *newTrial*() commands allow us to write down properties of the stimuli (or ones of participants) into the resulting file. I prefer to make a distinct column naming features of interest of stimuli in order to track them during the analysis.
+
+``` javascript
+.log("Condition",row.feature) 
 ```

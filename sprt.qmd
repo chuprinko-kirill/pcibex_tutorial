@@ -13,10 +13,11 @@ In this chapter we will discuss how to add to your project self-paced reading ta
 Template("pcibex_test.csv", row =>
 // 2) Make an example trial that will be filled with list's values
 newTrial( "experiment",
-    newButton("Start reading")
-        .center().print("center at 50vw","middle at 50vh")
-        .wait()
-        .remove()
+    newController("Separator",{
+        transfer: 1200,
+        normalMessage: "***",
+        errorMessage: "Wrong answer, be careful!"
+    }).center().print("center at 50vw","middle at 50vh").wait().remove()
     ,
     newController("DashedSentence", {s : row.sentence}) 
         .center().print("center at 50vw","middle at 50vh")
@@ -41,4 +42,63 @@ newTrial( "experiment",
 // 3) write down stimluli info in the resulting file
     .log("sentence_type",row.feature) 
 )
+```
+
+Let's look closer at the the code parts. *Template("pcibex_test.csv", row =\>)* holds the whole code of the experimental block in the brackets. First, we declare the name of the .csv file uploaded into the environment. Secondly, we declare a variable *row* that will iterate through each row of the file (you can change the name). In order to specify the column to refer you type *row* and the name of the column in the file with the dot, e.g. *row.sentence*.
+
+## Separators
+
+Let's begin each new experimental trial with a screen separating two consequent trials. In order to present any ***Controller*** (pre-made coded elements can be found at *Modules* area) you need to write its name in quotes as a first argument of the *newController* command. Parameters of the controller follow it after the comma.
+
+It will allow to control pauses between the trials. In this case pause is 1200ms written down in the *transfer* parameter. It also let us encourage participants to be more careful if they make an error at comprehension task. The message is stored in the *errorMessage* parameter which is optional.
+
+Don't miss all the commands placed with the dots. *.print()* puts it on the screen, *.wait()* actually puts a small pause until some event will happen (in this case until the transfer timer ends) and *.remove()* deletes the controller, so it doesn't stack with next slides.
+
+``` javascript
+ newController("Separator",{
+        transfer: 1200,
+        normalMessage: "***",
+        errorMessage: "Wrong answer, be careful!"
+    }).center().print("center at 50vw","middle at 50vh").wait().remove()
+```
+
+## Self-paced reading task stimulus
+
+In order to activate sprt itself you should choose "DashedSentence" and specify its content within the *s* parameter. In this case we use the experimental lits .csv, so we refer to a column where the stimuli are place with *row.sentence* (where *sentence* is a column name).
+
+``` javascript
+newController("DashedSentence", {s : row.sentence}) 
+  .center().print("center at 50vw","middle at 50vh")
+          .log()  // Make sure to log the participant's progress
+          .wait()
+          .remove()
+```
+
+## Comprehension question
+
+In my projects I prefer to keep comprehension questions and stimuli in the same files. However, usually there are less questions than stimuli. We don't want to spend our participants' time by showing them some empty screens instead of questions when we don't have them. Thus, we introduce a function evaluating whether there is a question for the stimulus presented at the moment. It can be read as following: if the *question* column for the current row is not empty, introduce the *Questioncontroller.*
+
+In the *as* parameter we can enlist possible answers. I prefer to store correct and wrong answers in separate columns. *hasCorrect:true* parameter allows to know us that the first mentioned thing in the *as* parameter is always true. It facilitates fixing in the resulting file whether the participant gave a correct answer or not. *randomOrder:true* makes an order of answers given to a participant random. So, this constructions allow us to easily write down participants responses and not to damage experiments' adequacy.
+
+``` javascript
+    newFunction("test_quest", () => row.question == "")
+        .testNot.is() 
+        .failure(
+            newController("Question",
+            {q: row.question,
+            as:[row.answer_correct, row.answer_wrong],
+            hasCorrect:true, 
+            randomOrder:true}) 
+            .center().print("center at 50vw","middle at 50vh")
+            .log().wait().remove(),
+            clear()  
+                )
+```
+
+## Logging down features
+
+This commands after the *newTrial*() commands allow us to write down properties of the stimuli (or ones of participants) into the resulting file. I prefer to make a distinct column naming features of interest of stimuli in order to track them during the analysis.
+
+``` javascript
+.log("sentence_type",row.feature) 
 ```
