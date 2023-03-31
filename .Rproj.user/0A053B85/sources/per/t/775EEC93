@@ -1,0 +1,31 @@
+{
+    "id": "775EEC93",
+    "path": "~/Documents/GitHub/pcibex_tutorial/intro.qmd",
+    "project_path": "intro.qmd",
+    "type": "quarto_markdown",
+    "hash": "1214524690",
+    "contents": "",
+    "dirty": false,
+    "created": 1680275638509.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "rmdVisualMode": "false",
+        "rmdVisualWrapConfigured": "true",
+        "source_window_id": "",
+        "Source": "Source",
+        "docOutlineVisible": "1",
+        "rmdVisualCollapsedChunks": "",
+        "rmdVisualModeLocation": "852:138.39999389648438",
+        "cursorPosition": "45,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1680276600,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1680276600181,
+    "read_only": false,
+    "read_only_alternatives": []
+}
