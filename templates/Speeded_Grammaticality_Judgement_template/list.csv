@@ -1,7 +1,0 @@
-group,prime,target,condition
-A,foggy,Phrase 1 of the group A,condition1
-A,dreadful,Phrase 2 of the group A,condition1
-A,joyful,Phrase 3 of the group A,condition2
-B,pithces,Phrase 1 of the group B,condition2
-B,collars,Phrase 2 of the group B,condition2
-B,regimes,Phrase 3 of the group B,condition1
