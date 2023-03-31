@@ -1,0 +1,29 @@
+# Speeded grammaticlity judgement
+
+``` javascript
+Template( "list.csv" , 
+    row => newTrial( "test" ,  
+        
+        newController("Separator",{
+            transfer: 1200,
+            normalMessage: "***",
+            errorMessage: "Time to answer is out!"
+        }).center().print("center at 50vw","middle at 50vh").wait().remove()
+        ,
+        
+        newController("AcceptabilityJudgment",{
+            s: "",
+            q: row.target,
+            as: ['1','2','3','4','5'],
+            presentAsScale: true,
+            autoFirstChar : true,
+            timeout: 5000
+        }).center().print("center at 50vw","middle at 50vh")
+        .log()
+        .wait()
+        .remove()
+    )
+    .log( "Group"     , row.group) 
+    .log( "Condition" , row.condition)
+)
+```

@@ -18,7 +18,7 @@
     "href": "intro.html#how-to-use-templates-we-are-about-to-discuss",
     "title": "1  Introduction",
     "section": "1.3 How to use templates we are about to discuss",
-    "text": "1.3 How to use templates we are about to discuss\nYou will need to download the needed files from the"
+    "text": "1.3 How to use templates we are about to discuss\nYou can copy the template from the templates folder or download them."
   },
   {
     "objectID": "summary.html",
@@ -33,5 +33,19 @@
     "title": "pcibex_tutorial",
     "section": "",
     "text": "Preface\n\nIn this tutorial we will discuss how to run experiments on the online platform PCIbex. We will discuss how to upload stimuli, do proper code for your research, share an experiment and download results. We will look in details at two experimental techniques with online measurements: self-paced reading task (sprt for short) and speeded grammaticality judgement (sgj).\n\n\nAll discussed templates are available at the GitHub repository of this tutorial.\n\n\nFor specific questions you should check the project documentation. It includes links to video and textual tutorials by the PCIbex team. If you encounter specific issues you can check out the dedicated forums which is pretty active at the moment."
+  },
+  {
+    "objectID": "common_code_and_form.html#convenience-code",
+    "href": "common_code_and_form.html#convenience-code",
+    "title": "2  Common code for all projects",
+    "section": "2.1 Convenience code",
+    "text": "2.1 Convenience code\n\nUsually all your projects should start with the following code. PennController.ResetPrefix() allows you to write most of commands in a shorter way. “// DebugOff()” is a commented line because it starts with “//”. It means that this line of code is disabled unless you remove the “//”. Remove it and you disable debugging menu while anyone participates at your experiment.\n\nPennController.ResetPrefix()\n// DebugOff()\n\nThere is a Sequence() function with arguments in the brackets. This command puts a strict way to execute logical blocks and other commands of your project. Some of the arguments are in quotation marks (they can be like this “” or this ’’, doesn’t matter). These are blocks that we insert later in the code. Words in quotes are names of the blocks we are free to change (but we have to change the names both in the sequence function and below in the code!). \nWe also see the SendResults() command before the “end” block. Unlike the blocks in the code, this function can be found only in this line. It writes down all the data gathered from a participant so far to the results file.\n\nSequence(\"instructions\", \"experiment\", SendResults(), \"end\")\n\nYou can add randomization to your trials within this line. For example, if we want to present our experimental task in a random manner we can write this:\n\nSequence(\"instructions\", randomize(\"experiment\"), SendResults(), \"end\")"
+  },
+  {
+    "objectID": "common_code_and_form.html#agreement-and-form",
+    "href": "common_code_and_form.html#agreement-and-form",
+    "title": "2  Common code for all projects",
+    "section": "2.2 Agreement and form",
+    "text": "2.2 Agreement and form\n\nHeader – is a command that maps commands on Trial elements. In other words, you write something for Header and it is automatically applied to each of Trial elements (which are our logical blocks of experiments).\n\n\nIn this particular case we declare two global variables AGE and SEX. Then, we use the .log() command to store a variable named “AGE” as a value of “age” column in our future dataset and the same with “SEX” and “sex”. It is convenient since we will not need to write the .log() commands for all experimental trials again.\n\nHeader(\n    newVar(\"AGE\").global(),\n    newVar(\"SEX\").global() \n)\n.log(\"age\", getVar(\"AGE\"))\n.log(\"sex\", getVar(\"SEX\"))\n\nMost probably you would like to collect some demographic information about your participants at least their age and sex in order to make your sample more representative. The way I prefer to do it is with uploading some html document with a small questionnaire. The sample html can be found with experiments’ templates. You should upload it into the Resources area of your project, afterwards you can open and modify it in your project.\n\n\nThe chunk below has several aims: 1) it prints out the html questionnaire uploaded into the environment 2) it checks whether a participant filled mandatory margins otherwise red-colored warnings appear when the ‘continue’ button is pushed 3) A getVar().set() command fetches the value filled in the form’s margin with the corresponding name and assigns it to the variable we declared in the Header(); we extract the values with the jQuery library.\n\nnewTrial(\"instructions\",\n// 1) print the questionnaire\nnewHtml(\"form\", \"form.html\")\n    .print()\n    ,\n// 2) check completeness\nnewButton(\"continue\")\n        .center()\n        .print()\n        .wait(getHtml(\"form\").test.complete()\n          .failure(getHtml(\"form\").warn())\n          )\n    ,\n// 3) assign values from the form to declared variables\n    getVar(\"AGE\").set(v=>$(\"input[name='age']\").val()), \n    getVar(\"SEX\").set(v=>$(\"input[name='sex']:checked\").val())\n)"
   }
 ]

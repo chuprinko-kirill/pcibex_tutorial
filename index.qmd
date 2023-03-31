@@ -5,6 +5,3 @@
 <p>All discussed templates are available at the GitHub repository of this tutorial.</p>
 
 <p>For specific questions you should check [the project documentation](https://doc.pcibex.net/). It includes links to video and textual tutorials by the PCIbex team. If you encounter specific issues you can check out [the dedicated forums](https://www.pcibex.net/forums/) which is pretty active at the moment.</p>
-
-
-

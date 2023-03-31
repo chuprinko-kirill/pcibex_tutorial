@@ -1,0 +1,44 @@
+# Self-paced reading task
+
+In this chapter we will discuss how to add to your project self-paced reading task. The chunk below represents a possible way to code sptr into your project. It consists of the following parts:
+
+1.  Introducing the uploaded .csv file with stimuli. 'row' is a variable name which will iterate through each row of you .csv file.
+
+2.  Introduce a new experimental block and write within it code just for one trial of your task + comprehension question. Instead of placing full stimulus sentences we will access your experimental list with *row* variable.
+
+3.  Write down to your resulting file some information about participants or stimuli. If you use *Header()* command you don't need to write commands to log participants' information from the questionnaire. Here, I usually prefer to write down some information about stimuli that I stored in the .csv list. It can ease the further analysis of the results.
+
+``` javascript
+// 1) Activate the stimuli list you uploaded
+Template("pcibex_test.csv", row =>
+// 2) Make an example trial that will be filled with list's values
+newTrial( "experiment",
+    newButton("Start reading")
+        .center().print("center at 50vw","middle at 50vh")
+        .wait()
+        .remove()
+    ,
+    newController("DashedSentence", {s : row.sentence}) 
+        .center().print("center at 50vw","middle at 50vh")
+        .log()  // Make sure to log the participant's progress
+        .wait()
+        .remove()
+    ,
+    // Add comprehension question if there is one     
+    newFunction("test_quest", () => row.question == "")
+        .testNot.is() 
+        .failure(
+            newController("Question",
+            {q: row.question,
+            as:[row.answer_correct, row.answer_wrong],
+            hasCorrect:true, 
+            randomOrder:true}) 
+            .center().print("center at 50vw","middle at 50vh")
+            .log().wait().remove(),
+            clear()  
+                )
+    )
+// 3) write down stimluli info in the resulting file
+    .log("sentence_type",row.feature) 
+)
+```

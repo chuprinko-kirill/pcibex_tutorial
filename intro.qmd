@@ -46,4 +46,4 @@ What is [PCIbex](https://doc.pcibex.net/) (PennController for Internet Based Exp
 
 ## How to use templates we are about to discuss
 
-You will need to download the needed files from the
+You can copy the template from [the *templates* folder](https://github.com/chuprinko-kirill/pcibex_tutorial/tree/main/templates) or download them.

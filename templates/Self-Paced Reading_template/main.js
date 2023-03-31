@@ -5,7 +5,7 @@ PennController.ResetPrefix(null); // Shorten command names (keep this line here)
 // showProgressBar = false // uncomment if you like to remove the progressbar on slides
 
 // First show instructions, then experiment trials, send results and show end screen
-Sequence("instructions", "experiment", SendResults(), "end")
+Sequence("instructions", "practice",randomize("experiment"), SendResults(), "end")
 
 // This is run at the beginning of each trial
 Header(
@@ -41,15 +41,47 @@ newButton("continue")
     getVar("SEX").set(v=>$("input[name='sex']:checked").val())
 )
 
+// Training session 
+newTrial("practice" ,
+    // Text element at the top of the page to signal this is a practice trial
+    newText("practice").color("blue").print("center at 50vw","top at 1em")
+    ,
+    newController("Separator",{
+     transfer: 1200, // time for break between tasks
+     normalMessage: "***",
+     errorMessage: "Time to answer is out!" // red colored message when there was no answer
+    }).center().print("center at 50vw","middle at 50vh").wait().remove()
+    ,
+    newController("DashedSentence", {s : "You will read sentences like this."}) // '.sentence' stands for the column name in the .csv
+        .center().print("center at 50vw","middle at 50vh")
+        .log()      // Make sure to log the participant's progress
+        .wait()
+        .remove()
+    ,
+     newController("Question",
+            {q: "What you will read", 
+            as:["sentences", "verses"], // array of possible answers
+            hasCorrect:true, //means that the first answer in "as" array is correct
+            randomOrder:true}) // randomize answers order
+            .center().print("center at 50vw","middle at 50vh")
+            .log().wait().remove(),
+            clear() // clear the slide after the question answered 
+    
+)
+
+
 // Experiment trials
 
 Template("pcibex_test.csv", row =>
 newTrial( "experiment",
-    newButton("Start reading")
-        .center().print("center at 50vw","middle at 50vh")
-        .wait()
-        .remove()
+    // add the screen that automatically separate trials
+    newController("Separator",{
+        transfer: 1200, // time of the separator slide
+        normalMessage: "***", // standard separator
+        errorMessage: "Wrong answer, be careful!" // errorMessage if the answer for a comprehension question was wrong
+    }).center().print("center at 50vw","middle at 50vh").wait().remove()
     ,
+    // Self-paced reading task itself
     newController("DashedSentence", {s : row.sentence}) // '.sentence' stands for the column name in the .csv
         .center().print("center at 50vw","middle at 50vh")
         .log()      // Make sure to log the participant's progress
@@ -71,10 +103,6 @@ newTrial( "experiment",
             clear() // clear the slide after the question answered 
                 )
     
-    ,
-    newButton("Next sentence please!") // participant moves to the next slide by pushing the button
-        .center().print("center at 50vw","middle at 50vh")
-        .wait()
     )
     .log("sentence_type",row.feature) // writing down some stimuli features will ease the data analysis
 )
